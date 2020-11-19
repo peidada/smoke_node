@@ -15,7 +15,7 @@ router.get('/string', async (ctx, next) => {
 
 router.get('/json', async (ctx, next) => {
   let data = {
-    title: 'koa2 jsons'
+    title: 'koa2 jsonss'
   }
   ctx.body = common.jsonFun(200, data, 'success');
 })
