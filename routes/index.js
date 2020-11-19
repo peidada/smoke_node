@@ -13,7 +13,7 @@ router.get('/string', async (ctx, next) => {
   ctx.body = 'koa2 string'
 })
 
-router.get('/json', async (ctx, next) => {
+router.get('/api/json', async (ctx, next) => {
   let data = {
     title: '年轻人不讲武德，耗子尾汁'
   }
