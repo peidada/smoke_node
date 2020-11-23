@@ -1,5 +1,5 @@
 const router = require('koa-router')()
-const common = require('../public/javascripts/common');
+// const common = require('../public/javascripts/common');
 
 //render渲染
 router.get('/', async (ctx, next) => {
@@ -14,10 +14,9 @@ router.get('/string', async (ctx, next) => {
 })
 
 router.get('/api/json', async (ctx, next) => {
-  let data = {
+  ctx.body = {
     title: '年轻人不讲武德，耗子尾汁'
   }
-  ctx.body = common.jsonFun(200, data, 'success');
 })
 
 module.exports = router
