@@ -9,6 +9,8 @@ const logger = require('koa-logger')
 const index = require('./routes/index')
 const users = require('./routes/users')
 
+const PetMysql = require('./config/db');
+
 const api = require('./routes/api/user_router');
 const response_formatter = require('./middlewares/response_formatter');
 
