@@ -36,7 +36,7 @@ exports.getUser = async(ctx, next) => {
     username: 'smokepei',
     account: 13718195083,
     password: 'smoke0124.',
-    country: CN,
+    country: CN ,
   }
 
 */
