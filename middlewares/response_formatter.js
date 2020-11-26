@@ -4,22 +4,32 @@
 
 */
 
+const { request } = require('../app');
 const ApiError = require('../error/ApiError');
 const ApiErrorNames = require('../error/ApiErrorNames');
 
 const response_formatter = async(ctx) => {
   
   //如果有返回数据，将返回数据添加到data中
-  if(ctx.body) {
+  let requestBody;
+
+  if(ctx.method == 'GET' && ctx.body != undefined) {
+    requestBody = JSON.parse(ctx.body);
+  }else if(ctx.method == 'POST') {
+    requestBody = JSON.parse(ctx.response.body);
+  }
+
+  if(requestBody) {
     ctx.body = {
       code: 0,
       message: 'success',
-      data: JSON.parse(ctx.body)
+      data: requestBody
     }
   }else {
     ctx.body = {
-      code: 0,
-      message: 'success'
+      code: -1,
+      message: 'error',
+      data: null
     }
   }
   
@@ -43,7 +53,7 @@ const url_filter = (pattern) => {
 
         ctx.body = JSON.stringify({
           code: error.code,
-          message: error.message
+          message: error.message,
         })
 
       }

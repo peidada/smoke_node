@@ -8,7 +8,7 @@
 const ApiError = require("../../error/ApiError");
 const ApiErrorNames = require("../../error/ApiErrorNames");
 
-const PetMysql = require('../../config/db');
+const MysqlModule = require('../../config/db');
 
 /* 获取用户 */
 exports.getUser = async(ctx, next) => {
@@ -21,8 +21,6 @@ exports.getUser = async(ctx, next) => {
     throw new ApiError(ApiErrorNames.USER_NOT_EXIST);
   }
 
-  // PetMysql.PetCreated();
-
   ctx.body = {
     username: 'smokepei',
     age: 26
@@ -31,7 +29,33 @@ exports.getUser = async(ctx, next) => {
 }
 
 /* 用户注册 */
+
+/* 
+
+  {
+    username: 'smokepei',
+    account: 13718195083,
+    password: 'smoke0124.',
+    country: CN,
+  }
+
+*/
+
 exports.registerUser = async(ctx, next) => {
-  console.log('registerUser', ctx.request.body);
-  ctx.body = ctx.request.body;
+  console.log('registerUser', ctx.request.body); 
+  // registerUser {username: 'smokepei', age: 28}
+
+  if(ctx.request.body.username == '' || ctx.request.body.account == '' || ctx.request.body.password == '') {
+    ctx.rest({
+      status: 400,
+      msg: '参数错误'
+    });
+  }else{
+    /* 插入数据 */
+    MysqlModule.UsersCreated(ctx.request.body);
+    ctx.rest({
+      status: 200,
+      mag: '注册成功'
+    });
+  }
 }

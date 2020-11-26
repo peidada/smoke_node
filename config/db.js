@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 const config = require('./config');
 
-let PetMysql = {};
+let MysqlModule = {};
 
 /* ORM 把关系型数据库的表结构映射到对象上 */
 
@@ -24,37 +24,24 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 
 })
 
-const Pet = sequelize.define('pets', {
+const Users = sequelize.define('users', {
   id: {
-    type: Sequelize.STRING(50),
+    type: Sequelize.NUMBER(11),
     primaryKey: true
   },
-  name: Sequelize.STRING(100),
-  gender: Sequelize.BOOLEAN,
-  birth: Sequelize.STRING(10),
-  createdAt: Sequelize.BIGINT,
-  updatedAt: Sequelize.BIGINT,
-  version: Sequelize.BIGINT
+  username: Sequelize.STRING(20),
+  account: Sequelize.STRING(50),
+  password: Sequelize.STRING(30),
+  country: Sequelize.STRING(10),
 }, {
   //使用自定义表名
   freezeTableName: true,
   timestamps: false
 });
 
-const now = Date.now();
-
-PetMysql.PetCreated = async () => {
-  console.log(222);
-  const dog = await Pet.create({
-    id: 'd-' + now,
-    name: 'dog',
-    gender: false,
-    birth: '2008-08-08',
-    createdAt: now,
-    updatedAt: now,
-    version: 0
-  })
-  console.log('created: ' + JSON.stringify(dog));
+MysqlModule.UsersCreated = async (data) => {
+  const user = await Users.create(data);
+  console.log('created: ' + JSON.stringify(user));
 };
 
-module.exports = PetMysql;
+module.exports = MysqlModule;
