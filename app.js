@@ -1,5 +1,6 @@
 const Koa = require('koa')
 const app = new Koa()
+const cors = require('koa2-cors');
 const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
@@ -27,6 +28,10 @@ app.use(bodyparser({
 
 /* 添加格式化处理响应结果的中间件，在添加路由之前调用 */
 app.use(response_formatter('^/api'));
+
+/* 解决跨域 */
+app.use(cors());
+
 app.use(rest())
 app.use(json())
 app.use(logger())

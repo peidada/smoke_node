@@ -48,14 +48,19 @@ exports.registerUser = async(ctx, next) => {
   if(ctx.request.body.username == '' || ctx.request.body.account == '' || ctx.request.body.password == '') {
     ctx.rest({
       status: 400,
-      msg: '参数错误'
+      msg: '参数错误',
+      data: null
     });
   }else{
     /* 插入数据 */
     MysqlModule.UsersCreated(ctx.request.body);
     ctx.rest({
       status: 200,
-      mag: '注册成功'
+      mag: '注册成功',
+      data: {
+        token: 'love you baby',
+        accessExpiredAt: new Date(),
+      }
     });
   }
 }
