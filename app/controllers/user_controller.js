@@ -58,7 +58,7 @@ exports.registerUser = async(ctx, next) => {
       status: 200,
       msg: '注册成功',
       data: {
-        token: 'love you baby',
+        token: 'love you babys',
         accessExpiredAt: new Date(),
       }
     });
