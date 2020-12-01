@@ -45,7 +45,7 @@ exports.registerUser = async(ctx, next) => {
   console.log('registerUser', ctx.request.body); 
   // registerUser {username: 'smokepei', age: 28}
 
-  if(ctx.request.body.username == '' || ctx.request.body.account == '' || ctx.request.body.password == '') {
+  if(ctx.request.body.username == '' || ctx.request.body.account == '' || ctx.request.body.password == '' || ctx.request.body.country == '') {
     ctx.rest({
       status: 400,
       msg: '参数错误',
@@ -56,7 +56,7 @@ exports.registerUser = async(ctx, next) => {
     MysqlModule.UsersCreated(ctx.request.body);
     ctx.rest({
       status: 200,
-      mag: '注册成功',
+      msg: '注册成功',
       data: {
         token: 'love you baby',
         accessExpiredAt: new Date(),
