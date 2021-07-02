@@ -4,7 +4,7 @@ const router = require('koa-router')()
 //render渲染
 router.get('/', async (ctx, next) => {
   await ctx.render('index', {
-    title: 'smoke_node'
+    title: 'smoke_nodess'
   })
 })
 
